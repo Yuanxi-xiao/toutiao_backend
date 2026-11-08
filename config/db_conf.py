@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession, create_async_engine
 
 #数据库URL
-ASNYC_DATABASE_URL = "mysql+aiomysql://root:123456@localhost:3306/ncws_app?charset=utf8mb4"
+ASNYC_DATABASE_URL = "mysql+aiomysql://root:123456@localhost:3306/fastapi_first?charset=utf8mb4"
 
 #创建异步引擎
 asnyc_engine = create_async_engine(
@@ -18,7 +18,7 @@ AsyncSessionLocal = async_sessionmaker(
 
 #依赖项，用于获取数据库会话
 async def get_db():
-    async with AsyncSessionLocal as session:
+    async with AsyncSessionLocal() as session:
         try:
             yield session
             await session.commit()
