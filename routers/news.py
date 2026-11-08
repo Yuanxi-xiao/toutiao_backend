@@ -34,12 +34,14 @@ async def get_news_list(
     skip = (page - 1) * page_size
     list = await news.get_news_list(category_id, skip, page_size, db)
     total = await news.get_news_count(category_id, db)
-    hasMore = (skip + page_size) < total
+    hasMore = (skip + len(list)) < total
     return {
         "code": 200,
         "message": "Success",
-        "data": list,
-        "total": total,
-        "hasMore" : hasMore
+        "data": {
+            "list": list,
+            "total": total,
+            "hasMore" : hasMore
+        }
     }
 
