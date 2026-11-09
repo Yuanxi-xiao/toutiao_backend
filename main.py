@@ -15,6 +15,7 @@ app.add_middleware(
     allow_methods=["*"],     #允许所有请求方法
     allow_headers=["*"]      #允许所有请求头
 )
+# 引入新闻路由
 app.include_router(news.router)
 
 @app.get("/")
